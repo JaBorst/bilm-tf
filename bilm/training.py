@@ -6,6 +6,7 @@ import os
 import time
 import json
 import re
+from tqdm import tqdm
 
 import tensorflow as tf
 import numpy as np
@@ -835,7 +836,7 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
 
         t1 = time.time()
         data_gen = data.iter_batches(batch_size * n_gpus, unroll_steps)
-        for batch_no, batch in enumerate(data_gen, start=1):
+        for batch_no, batch in enumerate(tqdm(data_gen), start=1):
 
             # slice the input in the batch for the feed_dict
             X = batch
