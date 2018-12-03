@@ -68,9 +68,9 @@ if __name__ == '__main__':
     parser.add_argument('--save_dir', help='Location of checkpoint files')
     parser.add_argument('--vocab_file', help='Vocabulary file')
     parser.add_argument('--train_prefix', help='Prefix for train files')
-    parser.add_argument('--n_gpus', help="Number of GPUs", default = 1)
+    parser.add_argument('--n_gpus', help="Number of GPUs", type=int default = 1)
     parser.add_argument('--ntokens', help="Number of tokens in Trainingset")
-    parser.add_argument('--batch_size', help="Number of tokens in Trainingset", default = 128)
+    parser.add_argument('--batch_size', help="Number of tokens in Trainingset",type=int, default = 128)
 
     args = parser.parse_args()
     main(args)
