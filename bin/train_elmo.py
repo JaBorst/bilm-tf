@@ -69,7 +69,7 @@ if __name__ == '__main__':
     parser.add_argument('--vocab_file', help='Vocabulary file')
     parser.add_argument('--train_prefix', help='Prefix for train files')
     parser.add_argument('--n_gpus', help="Number of GPUs", type=int, default = 1)
-    parser.add_argument('--ntokens', help="Number of tokens in Trainingset")
+    parser.add_argument('--ntokens',type = int, help="Number of tokens in Trainingset")
     parser.add_argument('--batch_size', help="Number of tokens in Trainingset",type=int, default = 128)
     parser.add_argument("--n_epochs", type = int, help="Number of epochs",default = 1)
 
