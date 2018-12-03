@@ -18,6 +18,11 @@ def main(args):
     # number of tokens in training data (this for 1B Word Benchmark)
     n_train_tokens = args.ntokens
 
+    n_negative_samples_batch=8192
+    if n_negative_samples_batch > n_train_tokens:
+        n_negative_samples_batch=int(n_train_tokens/2)
+
+
     options = {
      'bidirectional': True,
 
@@ -51,7 +56,7 @@ def main(args):
      'batch_size': batch_size,
      'n_tokens_vocab': vocab.size,
      'unroll_steps': 20,
-     'n_negative_samples_batch': 8192,
+     'n_negative_samples_batch': n_negative_samples_batch,
     }
 
     prefix = args.train_prefix
