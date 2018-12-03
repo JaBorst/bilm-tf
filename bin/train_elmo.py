@@ -46,7 +46,7 @@ def main(args):
     
      'all_clip_norm_val': 10.0,
     
-     'n_epochs': 10,
+     'n_epochs': args.n_epochs,
      'n_train_tokens': n_train_tokens,
      'batch_size': batch_size,
      'n_tokens_vocab': vocab.size,
@@ -71,6 +71,10 @@ if __name__ == '__main__':
     parser.add_argument('--n_gpus', help="Number of GPUs", type=int default = 1)
     parser.add_argument('--ntokens', help="Number of tokens in Trainingset")
     parser.add_argument('--batch_size', help="Number of tokens in Trainingset",type=int, default = 128)
+    parser.add_argument("--n_epochs", type = int, help="Number of epochs",default = 1)
 
     args = parser.parse_args()
     main(args)
+
+
+#python bin/train_elmo.py --save_dir save/ --vocab_file data/vocabulary --train_prefix data/train/* --n_gpus 2 --ntokens $(wc -l data/vocabulary | awk -F" " '{print$1}') --batch_size 128 --n_epochs=1
