@@ -19,7 +19,7 @@ def main(args):
     n_train_tokens = args.ntokens
 
     n_negative_samples_batch=8192
-    if n_negative_samples_batch > n_train_tokens:
+    if n_negative_samples_batch > vocab.size:
         n_negative_samples_batch=int(vocab.size/2)
 
 
