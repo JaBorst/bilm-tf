@@ -20,7 +20,7 @@ def main(args):
 
     n_negative_samples_batch=8192
     if n_negative_samples_batch > n_train_tokens:
-        n_negative_samples_batch=int(n_train_tokens/2)
+        n_negative_samples_batch=int(vocab.size/2)
 
 
     options = {
