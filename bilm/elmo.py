@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 import tensorflow as tf
 
 def weight_layers(name, bilm_ops, l2_coef=None,

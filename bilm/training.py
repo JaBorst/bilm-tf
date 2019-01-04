@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Train and test bidirectional language models.
 '''
@@ -789,7 +790,7 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
         n_tokens_per_batch = batch_size * unroll_steps * n_gpus
         n_batches_per_epoch = int(n_train_tokens / n_tokens_per_batch)
         n_batches_total = options['n_epochs'] * n_batches_per_epoch
-        print("Training for %s epochs and %s batches" % (
+        print("Training for %s epochs and %s batches\n\n" % (
             options['n_epochs'], n_batches_total))
 
         # get the initial lstm states
@@ -887,7 +888,7 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
                 print("Batch %s, train_perplexity=%s" % (batch_no, ret[2]))
                 print("Total time: %s" % (time.time() - t1))
 
-            if (batch_no % 1250 == 0) or (batch_no == n_batches_total):
+            if (batch_no % 2000 == 0) or (batch_no == n_batches_total):
                 # save the model
                 checkpoint_path = os.path.join(tf_save_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=global_step)
