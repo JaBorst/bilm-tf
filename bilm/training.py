@@ -790,6 +790,8 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
         n_tokens_per_batch = batch_size * unroll_steps * n_gpus
         n_batches_per_epoch = int(n_train_tokens / n_tokens_per_batch)
         n_batches_total = options['n_epochs'] * n_batches_per_epoch
+        print("NGPUs train function: %i" % (n_gpus,))
+        print("ntokens: %i" %(n_train_tokens,))
         print("Training for %s epochs and %s batches\n\n" % (
             options['n_epochs'], n_batches_total))
 
@@ -856,7 +858,7 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
             # This runs the train_op, summaries and the "final_state_tensors"
             #   which just returns the tensors, passing in the initial
             #   state tensors, token ids and next token ids
-            if batch_no % 1250 != 0:
+            if batch_no % 2000 != 0:
                 ret = sess.run(
                     [train_op, summary_op, train_perplexity] +
                                                 final_state_tensors,
@@ -880,9 +882,9 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
                 init_state_values = ret[4:]
                 
 
-            if batch_no % 1250 == 0:
+            if batch_no % 2000 == 0:
                 summary_writer.add_summary(ret[3], batch_no)
-            if batch_no % 100 == 0:
+            if batch_no % 2000 == 0:
                 # write the summaries to tensorboard and display perplexity
                 summary_writer.add_summary(ret[1], batch_no)
                 print("Batch %s, train_perplexity=%s" % (batch_no, ret[2]))

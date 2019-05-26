@@ -65,6 +65,7 @@ def main(args):
 
     tf_save_dir = args.save_dir
     tf_log_dir = args.save_dir
+    print("NGPUS in train_elmo: %i" %(n_gpus,))
     train(options, data, n_gpus, tf_save_dir, tf_log_dir)
 
 
