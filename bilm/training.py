@@ -839,7 +839,7 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
 
         t1 = time.time()
         data_gen = data.iter_batches(batch_size * n_gpus, unroll_steps)
-        for batch_no, batch in enumerate(tqdm(data_gen), start=1):
+        for batch_no, batch in enumerate(tqdm(data_gen,miniters=200), start=1):
 
             # slice the input in the batch for the feed_dict
             X = batch
@@ -858,7 +858,7 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
             # This runs the train_op, summaries and the "final_state_tensors"
             #   which just returns the tensors, passing in the initial
             #   state tensors, token ids and next token ids
-            if batch_no % 2000 != 0:
+            if batch_no % 6000 != 0:
                 ret = sess.run(
                     [train_op, summary_op, train_perplexity] +
                                                 final_state_tensors,
@@ -882,15 +882,15 @@ def train(options, data, n_gpus, tf_save_dir, tf_log_dir,
                 init_state_values = ret[4:]
                 
 
-            if batch_no % 2000 == 0:
+            if batch_no % 6000 == 0:
                 summary_writer.add_summary(ret[3], batch_no)
-            if batch_no % 2000 == 0:
+            if batch_no % 6000 == 0:
                 # write the summaries to tensorboard and display perplexity
                 summary_writer.add_summary(ret[1], batch_no)
                 print("Batch %s, train_perplexity=%s" % (batch_no, ret[2]))
                 print("Total time: %s" % (time.time() - t1))
 
-            if (batch_no % 2000 == 0) or (batch_no == n_batches_total):
+            if (batch_no % 6000 == 0) or (batch_no == n_batches_total):
                 # save the model
                 checkpoint_path = os.path.join(tf_save_dir, 'model.ckpt')
                 saver.save(sess, checkpoint_path, global_step=global_step)
